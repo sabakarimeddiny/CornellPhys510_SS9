@@ -36,8 +36,8 @@ class SS9GUI(ManagedWindow):
                 'mm4_range',
                 'mm4_address',
                 ],
-            x_axis='T',
-            y_axis='MM1 Reading'
+            x_axis='elapsed_time',
+            y_axis='T'
         )
         self.setWindowTitle('PyMeasure SS9 Lab')
 
