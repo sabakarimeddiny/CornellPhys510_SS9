@@ -20,9 +20,9 @@ class SS9GUI(ManagedWindow):
             displays=[
                 'your_name',
                 'field_strength',
-                'I_bias',
                 'delay',
                 'T_max',
+                'num_averages',
                 'mm1_measurement',
                 'mm1_range',
                 'mm1_address',
@@ -57,9 +57,9 @@ class SS9GUI(ManagedWindow):
         procedure = SS9Procedure()
         procedure.your_name = self.inputs.your_name.text()
         procedure.field_strength = self.inputs.field_strength.value()
-        procedure.I_bias = self.inputs.I_bias.isChecked()
         procedure.delay = self.inputs.delay.value() #s
         procedure.T_max = self.inputs.T_max.value() #K
+        procedure.num_averages = self.inputs.num_averages.value()
 
         procedure.mm1_measurement = [True,False][self.inputs.mm1_measurement.currentIndex()]
         procedure.mm1_range = [1, 10, 100][self.inputs.mm1_range.currentIndex()]

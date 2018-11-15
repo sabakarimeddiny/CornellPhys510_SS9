@@ -27,9 +27,9 @@ class SS9Procedure(Procedure):
 
     your_name = Parameter("Your Name", default='')
     field_strength = FloatParameter("Field Strength",  units='T', default=0)
-    I_bias = BooleanParameter('Current Forward?', default=True)
     delay = FloatParameter('Delay Time', units='s', default=20)
     T_max = IntegerParameter('Maximum Temp.', units = 'K', default = 350)
+    num_averages = IntegerParameter('Number of Averages', default = 5)
 
     mm1_measurement = BooleanParameter('Voltage', default=True)
     mm1_range = FloatParameter('Range', units = 'SI', default = 1)
@@ -47,9 +47,11 @@ class SS9Procedure(Procedure):
     mm4_range = FloatParameter('Range', units = 'SI', default = 1)
     mm4_address = Parameter("MM4 Adress", default = '')
 
-    DATA_COLUMNS = ['elapsed_time', 'T', 'MM1 Reading',
-                    'MM2 Reading', 'MM3 Reading',
-                    'MM4 Reading']
+    DATA_COLUMNS = ['elapsed_time', 'T', 'T_err'
+                    'MM1_reading', 'MM1_error',
+                    'MM2_reading', 'MM2_error',
+                    'MM3_reading', 'MM3_error',
+                    'MM4_reading', 'MM4_error']
 
     def startup(self):
         log.info("Setting up Multimeters")
@@ -90,43 +92,55 @@ class SS9Procedure(Procedure):
         log.info("Starting Measurement")
         #prev_T = read_T
         T_min = ul.t_in(0, 0, TempScale.KELVIN)
-        T = T_min
+        T = [T_min]
         start_time = time.time()
-        while T < self.T_max:
+        while np.mean(T) < self.T_max:
             sleep(self.delay)
             elapsed_time = time.time() - start_time
 
-            if self.mm1_measurement:
-                M1 = self.mm1.voltage
-            else:
-                M1 = self.mm1.current
+            T, M1, M2, M3, M4 =  [], [], [], [], []
 
-            if self.mm2_measurement:
-                M2 = self.mm2.voltage
-            else:
-                M2 = self.mm2.current
+            for i in range(self.num_averages):
+                if self.mm1_measurement:
+                    M1.append(self.mm1.voltage)
+                else:
+                    M1.append(self.mm1.current)
 
-            if self.mm3_measurement:
-                M3 = self.mm3.voltage
-            else:
-                M3 = self.mm3.current
+                if self.mm2_measurement:
+                    M2.append(self.mm2.voltage)
+                else:
+                    M2.append(self.mm2.current)
 
-            if self.mm4_measurement:
-                M4 = self.mm4.voltage
-            else:
-                M4 = self.mm4.current
-            T = ul.t_in(0, 0, TempScale.KELVIN)
-            prog = int(100*np.abs((T - T_min)/(self.T_max - T_min)))
+                if self.mm3_measurement:
+                    M3.append(self.mm3.voltage)
+                else:
+                    M3.append(self.mm3.current)
+
+                if self.mm4_measurement:
+                    M4.append(self.mm4.voltage)
+                else:
+                    M4.append(self.mm4.current)
+
+                T.append(ul.t_in(0, 0, TempScale.KELVIN))
+
+                sleep(self.delay / (self.num_averages + 1))
+
+            prog = int(100*np.abs((np.mean(T) - T_min)/(self.T_max - T_min)))
             self.emit("progress", prog)
 
 
             data = {
                 'elapsed_time': elapsed_time,
-                'T': T,
-                'MM1 Reading': M1,
-                'MM2 Reading': M2,
-                'MM3 Reading': M3,
-                'MM4 Reading': M4
+                'T': np.mean(T),
+                'T_err': np.std(T),
+                'MM1_reading': np.mean(M1),
+                'MM1_error': np.std(M1),
+                'MM2_reading': np.mean(M2),
+                'MM2_error': np.std(M2),
+                'MM3_reading': np.mean(M3),
+                'MM3_error': np.std(M3),
+                'MM4_reading': np.mean(M4),
+                'MM4_error': np.std(M4)
             }
 
             self.emit('results', data)
