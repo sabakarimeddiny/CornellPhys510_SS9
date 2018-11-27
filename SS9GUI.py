@@ -62,19 +62,19 @@ class SS9GUI(ManagedWindow):
         procedure.num_averages = self.inputs.num_averages.value()
 
         procedure.mm1_measurement = [True,False][self.inputs.mm1_measurement.currentIndex()]
-        procedure.mm1_range = [0.1, 1, 10][self.inputs.mm1_range.currentIndex()]
+        procedure.mm1_range = [0.1, 1, 10, 100][self.inputs.mm1_range.currentIndex()]
         procedure.mm1_address = self.inputs.mm1_address.text()
 
         procedure.mm2_measurement = [True,False][self.inputs.mm2_measurement.currentIndex()]
-        procedure.mm2_range = [0.1, 1, 10][self.inputs.mm2_range.currentIndex()]
+        procedure.mm2_range = [0.1, 1, 10, 100][self.inputs.mm2_range.currentIndex()]
         procedure.mm2_address = self.inputs.mm2_address.text()
 
         procedure.mm3_measurement = [True,False][self.inputs.mm3_measurement.currentIndex()]
-        procedure.mm3_range = [0.1, 1, 10][self.inputs.mm3_range.currentIndex()]
+        procedure.mm3_range = [0.1, 1, 10, 100][self.inputs.mm3_range.currentIndex()]
         procedure.mm3_address = self.inputs.mm3_address.text()
 
         procedure.mm4_measurement = [True,False][self.inputs.mm4_measurement.currentIndex()]
-        procedure.mm4_range = [0.1, 1, 10][self.inputs.mm4_range.currentIndex()]
+        procedure.mm4_range = [0.1, 1, 10, 100][self.inputs.mm4_range.currentIndex()]
         procedure.mm4_address = self.inputs.mm4_address.text()
 
         return procedure

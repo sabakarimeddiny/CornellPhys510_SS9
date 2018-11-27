@@ -47,7 +47,7 @@ class SS9Procedure(Procedure):
     mm4_range = FloatParameter('Range', units = 'SI', default = 1)
     mm4_address = Parameter("MM4 Adress", default = '')
 
-    DATA_COLUMNS = ['elapsed_time', 'T', 'T_err'
+    DATA_COLUMNS = ['elapsed_time', 'T', 'T_err',
                     'MM1_reading', 'MM1_error',
                     'MM2_reading', 'MM2_error',
                     'MM3_reading', 'MM3_error',
@@ -103,7 +103,7 @@ class SS9Procedure(Procedure):
             T, M1, M2, M3, M4 =  [], [], [], [], []
 
             for i in range(self.num_averages):
-                log.info("Doing average %d of %d", % (i, self.num_averages))
+                log.info("Doing average %d of %d" % (i, self.num_averages))
                 if self.mm1_measurement:
                     M1.append(self.mm1.voltage)
                 else:

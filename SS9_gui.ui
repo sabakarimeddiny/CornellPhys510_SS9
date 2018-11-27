@@ -208,6 +208,11 @@
       <widget class="QComboBox" name="mm1_range">
        <item>
         <property name="text">
+         <string>0.1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>1</string>
         </property>
        </item>
@@ -274,6 +279,11 @@
      </item>
      <item row="1" column="1">
       <widget class="QComboBox" name="mm2_range">
+       <item>
+        <property name="text">
+         <string>0.1</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>1</string>
@@ -344,6 +354,11 @@
       <widget class="QComboBox" name="mm3_range">
        <item>
         <property name="text">
+         <string>0.1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>1</string>
         </property>
        </item>
@@ -410,6 +425,11 @@
      </item>
      <item row="1" column="1">
       <widget class="QComboBox" name="mm4_range">
+       <item>
+        <property name="text">
+         <string>0.1</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>1</string>
