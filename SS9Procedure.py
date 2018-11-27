@@ -95,12 +95,15 @@ class SS9Procedure(Procedure):
         T = [T_min]
         start_time = time.time()
         while np.mean(T) < self.T_max:
+            log.info("Temperature is at %d, waiting for it to reach %d" % \
+                     (np.mean(T), self.T_max))
             sleep(self.delay)
             elapsed_time = time.time() - start_time
 
             T, M1, M2, M3, M4 =  [], [], [], [], []
 
             for i in range(self.num_averages):
+                log.info("Doing average %d of %d", % (i, self.num_averages))
                 if self.mm1_measurement:
                     M1.append(self.mm1.voltage)
                 else:
@@ -151,3 +154,4 @@ class SS9Procedure(Procedure):
                 continue
     def shutdown(self):
         log.info("Finished")
+        log.info("Please shut off heater, magnet and other instruments")

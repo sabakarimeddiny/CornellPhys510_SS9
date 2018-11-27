@@ -71,6 +71,23 @@
    </item>
    <item>
     <layout class="QGridLayout" name="field_params">
+     <item row="4" column="1">
+      <widget class="QSpinBox" name="num_averages">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="value">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Number of Averages</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1">
       <widget class="QDoubleSpinBox" name="T_max">
        <property name="suffix">
@@ -93,13 +110,6 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Current Bias Forward?</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
@@ -107,13 +117,13 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="2" column="1">
       <widget class="QDoubleSpinBox" name="field_strength">
        <property name="suffix">
         <string> T</string>
        </property>
        <property name="decimals">
-        <number>3</number>
+        <number>4</number>
        </property>
        <property name="minimum">
         <double>-1.000000000000000</double>
@@ -129,7 +139,14 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>Delay</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
       <widget class="QDoubleSpinBox" name="delay">
        <property name="suffix">
         <string> s</string>
@@ -138,34 +155,20 @@
         <number>1</number>
        </property>
        <property name="minimum">
-        <double>1.000000000000000</double>
+        <double>0.500000000000000</double>
        </property>
        <property name="maximum">
-        <double>60.000000000000000</double>
+        <double>6.000000000000000</double>
        </property>
        <property name="value">
-        <double>3.000000000000000</double>
+        <double>1.000000000000000</double>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="label_6">
        <property name="text">
         <string>Field Strength (consider dir.)</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_15">
-       <property name="text">
-        <string>Delay</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QCheckBox" name="I_bias">
-       <property name="text">
-        <string>check for forward</string>
        </property>
       </widget>
      </item>
